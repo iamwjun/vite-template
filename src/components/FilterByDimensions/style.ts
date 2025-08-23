@@ -5,6 +5,7 @@ export const Filter = styled.div`
   flex-flow: row nowrap;
   align-items: flex-start;
   justify-content: flex-start;
+  border-bottom: 1px solid #f5f5f5;
 `;
 
 export const FilterList = styled.div<{ $height: number; }>`
