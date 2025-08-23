@@ -35,9 +35,9 @@ interface FilterByDimensionsProps {
 
 type CheckedKeysMap = Map<string, Map<string, React.Key[]>>;
 
-type HeighObject = { curr: number, reality: number };
+type HeightObject = { curr: number, reality: number };
 
-type HeightMap = Map<string, HeighObject>;
+type HeightMap = Map<string, HeightObject>;
 
 const defaultHeight = 24;
 const defaultHeightMap: HeightMap = new Map([
@@ -67,7 +67,7 @@ export const FilterByDimensions: React.FC<FilterByDimensionsProps> = (
       });
 
       const currTotalHeight = nextHeightMap.get("total");
-      const nextTotalHeight: HeighObject = {
+      const nextTotalHeight: HeightObject = {
         curr: currTotalHeight?.curr || defaultHeight,
         reality: heightSum,
       };
@@ -108,25 +108,25 @@ export const FilterByDimensions: React.FC<FilterByDimensionsProps> = (
     const { curr = defaultHeight, reality = defaultHeight } = nextHeightMap.get(key) || {};
     const isCollapsed = !!(curr === defaultHeight);
 
-    const nextHeight: HeighObject = {
+    const nextHeight: HeightObject = {
       curr: isCollapsed ? reality : defaultHeight,
       reality,
     };
 
     if (key !== "total") {
-      const diffHeigth = isCollapsed ? (reality - defaultHeight) : (defaultHeight - reality);
+      const diffHeight = isCollapsed ? (reality - defaultHeight) : (defaultHeight - reality);
 
       const {
         curr: totalCurr = defaultHeight,
         reality: totalReality = defaultHeight,
       } = nextHeightMap.get("total") || {};
 
-      const nextTotalHeigth: HeighObject = {
-        curr: totalCurr + diffHeigth,
-        reality: totalReality + diffHeigth,
+      const nextTotalHeight: HeightObject = {
+        curr: totalCurr + diffHeight,
+        reality: totalReality + diffHeight,
       };
 
-      nextHeightMap.set("total", nextTotalHeigth);
+      nextHeightMap.set("total", nextTotalHeight);
     }
 
     nextHeightMap.set(key, nextHeight);
@@ -137,7 +137,7 @@ export const FilterByDimensions: React.FC<FilterByDimensionsProps> = (
   return (
     <>
     <Filter>
-      <FilterList $height={heightMap.get("total")?.curr || 24} ref={contentRef}>
+      <FilterList $height={heightMap.get("total")?.curr || defaultHeight} ref={contentRef}>
         {treeData.map(({ title, key: level1Key, children }) => (
           <FilterItem key={level1Key}>
             <FilterLabel>{title}</FilterLabel>
@@ -188,9 +188,9 @@ export const FilterByDimensions: React.FC<FilterByDimensionsProps> = (
               )}
             </FilterSingle>
             {heightMap.get("total")?.curr !== defaultHeight &&
-              (heightMap.get(level1Key)?.reality || 0) > 24 && (
+              (heightMap.get(level1Key)?.reality || 0) > defaultHeight && (
                 <FilterItemCollapse onClick={() => handleCollapsed(level1Key)}>
-                  {(heightMap.get(level1Key)?.curr || 0) > 24 ? '收起' : '展开'}
+                  {(heightMap.get(level1Key)?.curr || 0) > defaultHeight ? '收起' : '展开'}
                 </FilterItemCollapse>
               )}
           </FilterItem>
