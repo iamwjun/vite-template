@@ -1,6 +1,6 @@
 import "./App.css";
 
-import { FilterByDimensions, IndicatorsForm } from "./components";
+import { FilterByDimensions, IndicatorsForm, WarmingForm } from "./components";
 import type { Indicator } from "./components/IndicatorsForm";
 
 const initialValues: {
@@ -44,6 +44,7 @@ function App() {
     <div style={{ width: "100%" }}>
       <FilterByDimensions onChange={onChange} />
       <IndicatorsForm initialValues={initialValues} />
+      <WarmingForm />
     </div>
   );
 }

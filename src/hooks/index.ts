@@ -1,0 +1,1 @@
+export { useSelectSync } from "./useSelectSync";
