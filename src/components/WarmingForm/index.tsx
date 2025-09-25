@@ -18,6 +18,11 @@ export const WarmingForm: React.FC = () => {
     form,
     source: "options",
     target: "items",
+    format: (opt: DefaultOptionType) => ({
+      id: opt.value,
+      name: opt.label,
+      title: "",
+    }),
   });
 
   return (
